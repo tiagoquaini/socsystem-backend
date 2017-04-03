@@ -33,7 +33,7 @@ module.exports = function(){
 
 	// checking if password is valid
 	schema.methods.validPassword = function(password) {
-	  return bcrypt.compareSync(password, this.senha);
+	  return bcrypt.compareSync(password, this.password);
 	};
 
 	return mongoose.model("User", schema);
