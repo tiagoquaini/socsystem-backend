@@ -4,7 +4,7 @@ var crypto   = require('crypto');
 
 module.exports = function(app){
 
-    var UserController = app.controllers.usuario;
+    var UserController = app.controllers.user;
 
     app.post('/auth/login', function (req, res, next) {
         passport.authenticate('local-login', function (err, user, info) {

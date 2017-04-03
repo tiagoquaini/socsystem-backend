@@ -11,11 +11,11 @@ module.exports = function(){
 				unique : true
 			}
 		},
-		senha : {
+		password : {
 			type : String,
 			required : true
 		},
-		nome : {
+		name : {
 			type : String,
 			required : true
 		},
@@ -27,14 +27,14 @@ module.exports = function(){
 
 	// methods ======================
 	// generating a hash
-	schema.methods.generateHash = function(senha) {
-		return bcrypt.hashSync(senha, bcrypt.genSaltSync(8), null);
+	schema.methods.generateHash = function(password) {
+		return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
 	};
 
 	// checking if password is valid
-	schema.methods.validPassword = function(senha) {
-	  return bcrypt.compareSync(senha, this.senha);
+	schema.methods.validPassword = function(password) {
+	  return bcrypt.compareSync(password, this.senha);
 	};
 
-	return mongoose.model("Usuario", schema);
+	return mongoose.model("User", schema);
 };
