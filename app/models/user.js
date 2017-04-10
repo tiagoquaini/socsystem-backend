@@ -19,6 +19,10 @@ module.exports = function(){
 			type : String,
 			required : true
 		},
+		deactivated : {
+			type : Boolean,
+			default: false
+		}
 		createdAt : {
 			type : Date,
 			default : Date.now

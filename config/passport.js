@@ -93,11 +93,18 @@ module.exports = function(){
 
             // if no user is found, return the message
             if (!user)
-                return done(null, false, 'Usuário não encontrado.');
+                return done(null, false, {
+									INFO_CODE : 1,
+									message : 'Usuário não encontrado.'
+								});
 
             // if the user is found but the password is wrong
             if (!user.validPassword(password))
-                return done(null, false, 'Senha inválida.');
+                return done(null, false, {
+									INFO_CODE : 2,
+									message : 'Senha inválida.',
+									user : user
+								});
 
             // all is well, return successful user
             return done(null, user);

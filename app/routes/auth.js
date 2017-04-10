@@ -4,23 +4,24 @@ var crypto   = require('crypto');
 
 module.exports = function(app){
 
-    var UserController = app.controllers.user;
+    var AuthController = app.controllers.auth;
 
     app.post('/auth/login', function (req, res, next) {
-        passport.authenticate('local-login', function (err, user, info) {
+        passport.authenticate('local-login', function (err, user, mInfo) {
             if (err) {
                 return next(err);
             }
 
             if (!user) {
-                res.status(401).send(info);
+              AuthController.handleLoginError(req, res, mInfo);
             } else {
-                req.logIn(user, function (err) {
-                    if (err) {
-                        return next(err);
-                    }
-                    res.send(user);
-                });
+              req.logIn(user, function (err) {
+                if (err) {
+                  return next(err);
+                }
+                AuthController.createLoginHistory(user, true);
+                res.send(user);
+              });
             }
         })(req, res, next);
     });
