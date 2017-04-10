@@ -12,7 +12,7 @@ module.exports = function(){
 		successful : {
 			type : Boolean,
 			required : true
-		}
+		},
 		createdAt : {
 			type : Date,
 			default : Date.now
