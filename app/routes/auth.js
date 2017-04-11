@@ -1,6 +1,4 @@
-var async    = require('async');
 var passport = require('passport');
-var crypto   = require('crypto');
 
 module.exports = function(app){
 
