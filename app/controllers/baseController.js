@@ -58,13 +58,16 @@ module.exports = function( app ){
 	};
 
 	controller.getByProperty = function(req, res, oModel, sProperty, sPropertyValue){
+		var oQuery = {};
+		oQuery[sProperty] = sPropertyValue;
+
 		return oModel
-		.findOne({ sProperty : sPropertyValue })
+		.findOne(oQuery)
 		.exec()
 		.then(
 			function(oData){
 				if (!oData) {
-					res.status(404);
+					res.status(404).send("Not found.");;
 				} else {
 					res.json(oData);
 				}
@@ -76,14 +79,18 @@ module.exports = function( app ){
 	};
 
 	controller.getByPropertyAndPopulate = function(req, res, oModel, sProperty, sPropertyValue, sPopulateAttribute){
+		var oQuery = {};
+		oQuery[sProperty] = sPropertyValue;
+
 		return oModel
-		.findOne({ "_id" : sPropertyValue })
+		.findOne(oQuery)
 		.populate(sPopulateAttribute)
 		.exec()
 		.then(
 			function(oData){
+				console.log(oData);
 				if (!oData) {
-					res.status(404);
+					res.status(404).send("Not found.");
 				} else {
 					res.json(oData);
 				}
@@ -95,8 +102,11 @@ module.exports = function( app ){
 	};
 
 	controller.deleteByProperty = function(req, res, oModel, sProperty, sPropertyValue){
+		var oQuery = {};
+		oQuery[sProperty] = sPropertyValue;
+
 		return oModel
-		.remove({ sProperty : sPropertyValue })
+		.remove(oQuery)
 		.exec()
 		.then(
 			function(){
@@ -122,8 +132,11 @@ module.exports = function( app ){
 	};
 
 	controller.updateByProperty = function(req, res, oModel, mModelValues, sProperty, sPropertyValue){
+		var oQuery = {};
+		oQuery[sProperty] = sPropertyValue;
+
 		return oModel
-		.findOne({ sProperty : sPropertyValue })
+		.findOne(oQuery)
 		.then(
 			function(oEntity){
 

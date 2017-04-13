@@ -20,11 +20,11 @@ module.exports = function( app ){
 	};
 
 	controller.getUserWishList = function(req, res, next){
-		BaseController.getByPropertyAndPopulate(req, res, WishList, "user", req.user, "products");
+		BaseController.getByPropertyAndPopulate(req, res, WishList, "user", req.user._id, "products");
 	};
 
 	controller.deleteUserWishList = function(req, res, next){
-		BaseController.deleteByProperty(req, res, WishList, "user", req.user);
+		BaseController.deleteByProperty(req, res, WishList, "user", req.user._id);
 	};
 
 	return controller;

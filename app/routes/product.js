@@ -5,7 +5,7 @@ module.exports = function(app){
 
     app
       .route('/products')
-      .post(BaseController.verifyAuthentication, BaseController.verifyAdmin, ProductController.postProduct)
+      .post(BaseController.verifyAuthentication, ProductController.postProduct)
       .get(ProductController.getProducts);
 
     app
