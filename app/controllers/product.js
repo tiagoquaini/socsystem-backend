@@ -13,17 +13,17 @@ module.exports = function( app ){
 
 	controller.getProductById = function(req, res, next){
 		var sId = req.params.id;
-		BaseController.getById(req, res, Product, sId);
+		BaseController.getByProperty(req, res, Product, "_id", sId);
 	};
 
 	controller.deleteProductById = function(req, res, next){
 		var sId = req.params.id;
-		BaseController.deleteById(req, res, Product, sId);
+		BaseController.deleteByProperty(req, res, Product, "_id", sId);
 	};
 
 	controller.putProductById = function(req, res, next){
 		var sId = req.params.id;
-		BaseController.updateById(req, res, Product, req.body, sId);
+		BaseController.updateByProperty(req, res, Product, req.body, "_id", sId);
 	};
 
 	return controller;

@@ -57,9 +57,9 @@ module.exports = function( app ){
 		);
 	};
 
-	controller.getById = function(req, res, oModel, sId){
+	controller.getByProperty = function(req, res, oModel, sProperty, sPropertyValue){
 		return oModel
-		.findOne({ "_id" : sId })
+		.findOne({ sProperty : sPropertyValue })
 		.exec()
 		.then(
 			function(oData){
@@ -75,9 +75,28 @@ module.exports = function( app ){
 		);
 	};
 
-	controller.deleteById = function(req, res, oModel, sId){
+	controller.getByPropertyAndPopulate = function(req, res, oModel, sProperty, sPropertyValue, sPopulateAttribute){
 		return oModel
-		.remove({ "_id" : sId })
+		.findOne({ "_id" : sPropertyValue })
+		.populate(sPopulateAttribute)
+		.exec()
+		.then(
+			function(oData){
+				if (!oData) {
+					res.status(404);
+				} else {
+					res.json(oData);
+				}
+			},
+			function(error){
+				res.status(404).json(error);
+			}
+		);
+	};
+
+	controller.deleteByProperty = function(req, res, oModel, sProperty, sPropertyValue){
+		return oModel
+		.remove({ sProperty : sPropertyValue })
 		.exec()
 		.then(
 			function(){
@@ -102,9 +121,9 @@ module.exports = function( app ){
 		);
 	};
 
-	controller.updateById = function(req, res, oModel, mModelValues, sId){
+	controller.updateByProperty = function(req, res, oModel, mModelValues, sProperty, sPropertyValue){
 		return oModel
-		.findOne({ "_id" : sId })
+		.findOne({ sProperty : sPropertyValue })
 		.then(
 			function(oEntity){
 
