@@ -23,3 +23,14 @@ or you can only run
 ```
 $ mongod
 ```
+
+### Admin
+In order to make yourself an admin, use following command on mongodb:
+```
+db.users.update(
+  {"name": "tiago"},
+  {
+    $set: {"admin": true}
+  }
+)
+```
