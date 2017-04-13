@@ -4,7 +4,7 @@ module.exports = function(app){
         WishListController = app.controllers.wishList;
 
     app
-      .route('/wishLists/me')
+      .route('/wishlists/me')
       .post(BaseController.verifyAuthentication, WishListController.postUserWishList)
       .put(BaseController.verifyAuthentication, WishListController.putUserWishList)
       .delete(BaseController.verifyAuthentication, WishListController.deleteUserWishList)
