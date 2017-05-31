@@ -11,9 +11,9 @@ module.exports = function(){
 				unique : true
 			}
 		},
-		products : [{
+		items : [{
 			type : mongoose.Schema.ObjectId,
-			ref : "Product"
+			ref : "ShoppingCartItem"
 		}],
 		createdAt : {
 			type : Date,
@@ -21,5 +21,5 @@ module.exports = function(){
 		}
 	});
 
-	return mongoose.model("WishList", schema);
+	return mongoose.model("ShoppingCart", schema);
 };
