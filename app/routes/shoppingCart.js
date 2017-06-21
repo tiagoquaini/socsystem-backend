@@ -1,25 +1,13 @@
-var mongoose = require('mongoose');
+module.exports = function(app){
 
-module.exports = function(){
-	var schema = mongoose.Schema({
+    var BaseController = app.controllers.baseController,
+        ShoppingCartController = app.controllers.shoppingCart;
 
-		user : {
-			type : mongoose.Schema.ObjectId,
-			ref : "User",
-			required : true,
-			index : {
-				unique : true
-			}
-		},
-		items : [{
-			type : mongoose.Schema.ObjectId,
-			ref : "ShoppingCartItem"
-		}],
-		createdAt : {
-			type : Date,
-			default : Date.now
-		}
-	});
+    app
+      .route('/shoppingCart/me')
+      .post(BaseController.verifyAuthentication, ShoppingCartController.postUserShoppingCart)
+      .put(BaseController.verifyAuthentication, ShoppingCartController.putUserShoppingCart)
+      .delete(BaseController.verifyAuthentication, ShoppingCartController.deleteUserShoppingCart)
+      .get(BaseController.verifyAuthentication, ShoppingCartController.getUserShoppingCart);
 
-	return mongoose.model("ShoppingCart", schema);
-};
+}

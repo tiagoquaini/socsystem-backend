@@ -15,7 +15,8 @@ module.exports = function(){
 			type : Number
 		},
 		img : {
-			type : String
+			data : Buffer,
+			contentType : String
 		},
 		createdAt : {
 			type : Date,
